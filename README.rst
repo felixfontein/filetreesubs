@@ -13,6 +13,8 @@ See the following three examples for typical use cases of
 insert a sidebar into all generated HTML pages, and a tag cloud into
 the sidebar and the tag overview page.
 
+To install, use ``pip install filetreesubs``.
+
 
 Example
 -------

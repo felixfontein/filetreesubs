@@ -37,7 +37,7 @@ setup(
     ],
     keywords='synchronization substitution',
     packages=find_packages(),
-    install_requires=['doit>=0.28.0', 'setuptools>=20.3'],
+    install_requires=['doit>=0.28.0', 'setuptools>=20.3', 'pyyaml'],
     entry_points={
         'console_scripts': [
             'filetreesubs = filetreesubs.__main__:main',

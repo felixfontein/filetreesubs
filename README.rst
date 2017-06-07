@@ -63,6 +63,13 @@ the files from ``input/``, except ``menu.inc``, and makes sure the substitutions
 take place.
 
 
+Example: Sidebar in Nikola
+--------------------------
+
+You can find an example site for Nikola using the `sidebar plugin <https://plugins.getnikola.com/v7/sidebar/>`__
+in `the Github repository felixfontein/filetreesubs-nikola-demo <https://github.com/felixfontein/filetreesubs-nikola-demo/>`__.
+
+
 Example: Substitution chains
 ----------------------------
 

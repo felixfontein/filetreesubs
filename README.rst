@@ -69,6 +69,10 @@ Example: Sidebar in Nikola
 You can find an example site for Nikola using the `sidebar plugin <https://plugins.getnikola.com/v7/sidebar/>`__
 in `the Github repository felixfontein/filetreesubs-nikola-demo <https://github.com/felixfontein/filetreesubs-nikola-demo/>`__.
 
+A more complex, but less explicit example can be found `in my blog <https://spielwiese.fontein.de/2017/01/06/static-sidebar-and-tag-cloud/>`__,
+which also includes a tag cloud (rendered by the `static_tag_cloud pugin <https://plugins.getnikola.com/v7/static_tag_cloud/>`__)
+into the sidebar.
+
 
 Example: Substitution chains
 ----------------------------

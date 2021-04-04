@@ -48,6 +48,7 @@ class FileTreeSubs(object):
     substitute_chains = []
     create_index_filename = None
     create_index_content = ''
+    doit_config_update = {}
     encoding = 'utf-8'
 
     def _do_copy(self, source, destination):

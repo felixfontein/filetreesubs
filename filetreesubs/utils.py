@@ -94,7 +94,7 @@ def write_contents(filename, content, encoding='utf-8'):
     """Write the file content to the given string. Will use the specified encoding."""
     try:
         os.unlink(filename)
-    except:
+    except:  # noqa E722
         pass
     with open(filename, "wb") as f:
         f.write(content.encode(encoding))

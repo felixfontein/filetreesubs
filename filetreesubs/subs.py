@@ -56,7 +56,7 @@ class FileTreeSubs(object):
         utils.ensure_file_directory_exists(destination)
         try:
             os.unlink(destination)
-        except:
+        except:  # noqa E722
             pass
         shutil.copy2(source, destination)
 

@@ -10,6 +10,17 @@ authors = ["Felix Fontein <felix@fontein.de>"]
 license = "MIT"
 readme = "README.rst"
 repository = "https://github.com/felixfontein/filetreesubs"
+keywords = ["synchronization", "substitution"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Intended Audience :: End Users/Desktop",
+    "Topic :: Internet :: WWW/HTTP :: Site Management",
+    "Topic :: Software Development :: Build Tools",
+    "Topic :: Text Processing",
+    "Topic :: Utilities",
+    "License :: OSI Approved :: MIT License",
+]
 packages = [
     { include = "filetreesubs" },
 ]

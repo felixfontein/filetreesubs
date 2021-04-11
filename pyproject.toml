@@ -40,7 +40,6 @@ PyYAML = "*"
 [tool.poetry.dev-dependencies]
 flake8 = "*"
 pylint = "*"
-mock = "*"
 
 [tool.isort]
 line_length = 100

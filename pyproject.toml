@@ -40,7 +40,6 @@ PyYAML = "*"
 [tool.poetry.dev-dependencies]
 flake8 = "*"
 pylint = "*"
-mypy = "*"
 mock = "*"
 
 [tool.isort]

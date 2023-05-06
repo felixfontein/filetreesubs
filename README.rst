@@ -1,3 +1,7 @@
+..
+  Copyright © 2014—2023 Felix Fontein.
+  SPDX-License-Identifier: MIT
+
 File Tree Subs
 ==============
 

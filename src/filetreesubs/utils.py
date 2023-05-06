@@ -1,6 +1,6 @@
-# -*- coding: utf-8 -*-
+# SPDX-License-Identifier: MIT
 
-# Copyright © 2014—2017 Felix Fontein.
+# Copyright © 2014—2023 Felix Fontein.
 #
 # Permission is hereby granted, free of charge, to any
 # person obtaining a copy of this software and associated
@@ -26,7 +26,7 @@
 
 """Utility functions"""
 
-from __future__ import print_function, unicode_literals, absolute_import
+from __future__ import annotations
 
 import os
 import os.path
@@ -38,9 +38,8 @@ def makedirs(path):
         return
     if os.path.exists(path):
         if not os.path.isdir(path):
-            raise OSError('Path {0} already exists and is not a folder.'.format(path))
-        else:
-            return
+            raise OSError(f"Path {path} already exists and is not a folder.")
+        return
     try:
         os.makedirs(path)
         return
@@ -53,8 +52,8 @@ def makedirs(path):
 def get_relname(path, relative_to):
     """Get relative path name, where '.' is converted to ''."""
     path = os.path.relpath(path, relative_to)
-    if path == '.':
-        path = ''
+    if path == ".":
+        path = ""
     return path
 
 
@@ -79,22 +78,24 @@ def substitute(text, replacements):
             break
         # Replace
         replacement = replacements[search_text]
-        text = text[:search_index] + replacement + text[search_index + len(search_text):]
+        text = (
+            text[:search_index] + replacement + text[search_index + len(search_text) :]
+        )
         index = search_index + len(replacement)
     return text
 
 
-def get_contents(filename, encoding='utf-8'):
+def get_contents(filename, encoding="utf-8"):
     """Retrieve the file content's as a decoded string."""
-    with open(filename, "rb") as f:
-        return f.read().decode(encoding)
+    with open(filename, "rb") as file:
+        return file.read().decode(encoding)
 
 
-def write_contents(filename, content, encoding='utf-8'):
+def write_contents(filename, content, encoding="utf-8"):
     """Write the file content to the given string. Will use the specified encoding."""
     try:
         os.unlink(filename)
-    except:  # noqa E722
+    except Exception:  # pylint:disable=broad-exception-caught
         pass
-    with open(filename, "wb") as f:
-        f.write(content.encode(encoding))
+    with open(filename, "wb") as file:
+        file.write(content.encode(encoding))

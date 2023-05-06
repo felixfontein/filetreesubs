@@ -1,5 +1,6 @@
-filetreesubs.egg-info/
-build/
-dist/
+# Copyright © 2014—2023 Felix Fontein.
+# SPDX-License-Identifier: MIT
+
+/dist/
+/.nox
 __pycache__/
-.tox

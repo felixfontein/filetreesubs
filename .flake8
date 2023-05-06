@@ -1,0 +1,10 @@
+# Copyright © 2014—2023 Felix Fontein.
+# SPDX-License-Identifier: MIT
+
+[flake8]
+count = true
+max-complexity = 10
+statistics = true
+
+# Ignore errors that clash with black
+extend-ignore = E203,E501

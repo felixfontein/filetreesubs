@@ -199,7 +199,7 @@ class FileTreeSubs:
                     destfiles.remove(filename)
                 dst_file = os.path.join(self.destination, filename)
                 yield {
-                    "basename": "createindex",
+                    "basename": "create_index",
                     "name": dst_file,
                     "targets": [dst_file],
                     "actions": [(self._do_createindex, (dst_file,))],

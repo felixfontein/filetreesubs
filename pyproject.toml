@@ -47,9 +47,17 @@ codeqa = [
     "pylint >= 2.17.4",
     "reuse",
 ]
+coverage = [
+    "coverage[toml]",
+]
 formatters = [
     "black",
     "isort",
+]
+test = [
+    "pytest",
+    "pytest-cov",
+    "pytest-error-for-skips",
 ]
 dev = [
     # Used by nox sessions

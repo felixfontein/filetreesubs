@@ -26,7 +26,7 @@ classifiers = [
 ]
 requires-python = ">=3.9"
 dependencies = [
-    "doit >= 0.28.0",
+    "doit >= 0.36.0",
     "PyYAML",
 ]
 
@@ -39,7 +39,7 @@ email = "felix@fontein.de"
 "Bug tracker" = "https://github.com/felixfontein/filetreesubs/issues"
 
 [project.scripts]
-antsibull-docs = "filetreesubs.__main__:main"
+filetreesubs = "filetreesubs.__main__:main"
 
 [project.optional-dependencies]
 codeqa = [

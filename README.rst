@@ -5,6 +5,9 @@
 File Tree Subs
 ==============
 
+[![Tests badge](https://github.com/felixfontein/filetreesubs/actions/workflows/python.yml/badge.svg)](https://github.com/felixfontein/filetreesubs/actions/workflows/python.yml)
+[![Codecov badge](https://img.shields.io/codecov/c/github/felixfontein/filetreesubs)](https://codecov.io/gh/felixfontein/filetreesubs)
+
 Allows to synchronize a destination file tree from a source file tree
 while allowing certain substitutions to take place.
 

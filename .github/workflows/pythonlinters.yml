@@ -1,6 +1,6 @@
-# This workflow will install Python dependencies, run tests and lint with
-# a variety of Python versions For more information see:
-# https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
+---
+# Copyright © 2014—2023 Felix Fontein.
+# SPDX-License-Identifier: MIT
 
 name: Python linting
 
@@ -13,41 +13,19 @@ on:
   schedule:
     - cron: '0 6 * * 5'
 
+env:
+  FORCE_COLOR: "1"
+
 jobs:
-  build:
-    runs-on: >-
-      ${{ contains(fromJson(
-          '["2.7", "3.5", "3.6"]'
-      ), matrix.python-version) && 'ubuntu-20.04' || 'ubuntu-latest' }}
-    strategy:
-      matrix:
-        python-version:
-          - 2.7
-          - 3.5
-          - 3.6
-          - 3.7
-          - 3.8
-          - 3.9
-          - '3.10'
-          - '3.11'
-
+  lint:
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v4
+      - name: Check out filetreesubs
+        uses: actions/checkout@v3
+      - name: Setup nox
+        uses: wntrblm/nox@2023.04.22
         with:
-          python-version: ${{ matrix.python-version }}
-      - name: Install dependencies
+          python-versions: "3.11"
+      - name: Run linters.
         run: |
-          python -m pip install --upgrade pip astroid
-          python -m pip install poetry
-          poetry install
-
-      - name: Lint with flake8
-        run: |
-          ./lint-flake8.sh
-
-      - name: Lint with pylint (non-voting)
-        run: |
-          ./lint-pylint.sh || :
-        if: always()
+          nox -v -e lint

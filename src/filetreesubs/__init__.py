@@ -1,6 +1,6 @@
-# -*- coding: utf-8 -*-
+# SPDX-License-Identifier: MIT
 
-# Copyright © 2014—2017 Felix Fontein.
+# Copyright © 2014—2023 Felix Fontein.
 #
 # Permission is hereby granted, free of charge, to any
 # person obtaining a copy of this software and associated
@@ -26,6 +26,6 @@
 
 """FileTreeSubs -- synchronize a file tree with text file substitutions."""
 
-from __future__ import print_function, unicode_literals, absolute_import
+from __future__ import annotations
 
-__version__ = '1.0.0'
+__version__ = "1.2.0"

@@ -1,0 +1,37 @@
+---
+# Copyright © 2023 Felix Fontein.
+# SPDX-License-Identifier: MIT
+
+source: baseline-full-source
+destination: baseline-full
+substitutes:
+  # The following is a regular expression to match the filenames:
+  '.*\.html':
+    # The strings to replace
+    'INSERT_MENU_HERE':
+      # With what to replace them
+      file: menu.inc
+    'INSERT_TESTIMONIALS':
+      file: testimonials.inc
+    'COPYRIGHT_YEAR':
+      text: '2023'
+substitute_chains:
+- template: menu.inc
+  substitutes:
+    'INSERT_TESTIMONIALS':
+      file: testimonials.inc
+create_index_filename: index.html
+create_index_content: |
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <title>Nothing.</title>
+      <meta name="robots" content="noindex">
+      <meta http-equiv="refresh" content="0; url=..">
+    </head>
+    <body>
+    </body>
+  </html>
+encoding: utf-8
+doit_config:
+  dep_file: '.baseline-full.db'

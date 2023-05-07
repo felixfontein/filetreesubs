@@ -10,7 +10,7 @@ name = "filetreesubs"
 version = "1.2.0"
 description = "Synchronize a file tree with text file substitutions"
 license = "MIT"
-readme = "README.rst"
+readme = "README.md"
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Intended Audience :: Developers",

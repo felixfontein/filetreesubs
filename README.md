@@ -1,6 +1,7 @@
-..
-  Copyright © 2014—2023 Felix Fontein.
-  SPDX-License-Identifier: MIT
+<!--
+Copyright © 2014—2023 Felix Fontein.
+SPDX-License-Identifier: MIT
+-->
 
 File Tree Subs
 ==============
@@ -8,25 +9,19 @@ File Tree Subs
 [![Tests badge](https://github.com/felixfontein/filetreesubs/actions/workflows/python.yml/badge.svg)](https://github.com/felixfontein/filetreesubs/actions/workflows/python.yml)
 [![Codecov badge](https://img.shields.io/codecov/c/github/felixfontein/filetreesubs)](https://codecov.io/gh/felixfontein/filetreesubs)
 
-Allows to synchronize a destination file tree from a source file tree
-while allowing certain substitutions to take place.
+Allows to synchronize a destination file tree from a source file tree while allowing certain substitutions to take place.
 
-File Tree Subs uses `doit <http://pydoit.org/>`__ under the hood to keep
-track of changes, so that files are only changed if necessary.
+File Tree Subs uses [doit](http://pydoit.org/) under the hood to keep track of changes, so that files are only changed if necessary.
 
-See the following three examples for typical use cases of
-``filetreesubs``. I'm personally using it to preprocess the output of
-`Nikola <https://getnikola.com/>`__, a static blog/site generator, to
-insert a sidebar into all generated HTML pages, and a tag cloud into
-the sidebar and the tag overview page.
+See the following three examples for typical use cases of `filetreesubs`. I'm personally using it to preprocess the output of [Nikola](https://getnikola.com/), a static blog/site generator, to insert a sidebar into all generated HTML pages, and a tag cloud into the sidebar and the tag overview page.
 
-To install, use ``pip install filetreesubs``.
+To install, use `pip install filetreesubs`.
 
 
 Example
 -------
 
-Assume you have the following file tree::
+Assume you have the following file tree:
 
     input/
         index.html
@@ -35,19 +30,14 @@ Assume you have the following file tree::
         menu.inc
         testimonials.inc
 
-In the ``.html`` files, you put placeholder strings ``INSERT_MENU_HERE`` for where
-the content of ``input/menu.inc`` should be inserted, and ``INSERT_TESTIMONIALS``
-for where the content of ``input/testimonials.inc`` should be inserted. Also, you
-want ``COPYRIGHT_YEAR`` to be replaced by 2017. The result should be a tree like
-this, without the ``.inc`` files::
+In the `.html` files, you put placeholder strings `INSERT_MENU_HERE` for where the content of `input/menu.inc` should be inserted, and `INSERT_TESTIMONIALS` for where the content of `input/testimonials.inc` should be inserted. Also, you want `COPYRIGHT_YEAR` to be replaced by 2017. The result should be a tree like this, without the `.inc` files:
 
     output/
         index.html
         team.html
         products.html
 
-with the placeholder string replaced. To do this with ``filetreesubs``, create a
-config file ``filetreesubs-config.yaml``::
+with the placeholder string replaced. To do this with `filetreesubs`, create a config file `filetreesubs-config.yaml`:
 
     # Source directory
     source: input
@@ -65,32 +55,23 @@ config file ``filetreesubs-config.yaml``::
         'COPYRIGHT_YEAR':
           text: '2017'
 
-Then running ``filetreesubs`` will synchornize ``output/`` so that it contains
-the files from ``input/``, except ``menu.inc``, and makes sure the substitutions
-take place.
+Then running `filetreesubs` will synchronize `output/` so that it contains the files from `input/`, except `menu.inc`, and makes sure the substitutions take place.
 
 
 Example: Sidebar in Nikola
 --------------------------
 
-You can find an example site for Nikola using the `sidebar plugin <https://plugins.getnikola.com/v7/sidebar/>`__
-in `the Github repository felixfontein/filetreesubs-nikola-demo <https://github.com/felixfontein/filetreesubs-nikola-demo/>`__.
+You can find an example site for Nikola using the [sidebar plugin](https://plugins.getnikola.com/v8/sidebar/) in [the Github repository felixfontein/filetreesubs-nikola-demo](https://github.com/felixfontein/filetreesubs-nikola-demo/).
 
-A more complex, but less explicit example can be found `in my blog <https://spielwiese.fontein.de/2017/01/06/static-sidebar-and-tag-cloud/>`__,
-which also includes a tag cloud (rendered by the `static_tag_cloud pugin <https://plugins.getnikola.com/v7/static_tag_cloud/>`__)
-into the sidebar.
+A more complex, but less explicit example can be found [in my blog](https://spielwiese.fontein.de/2017/01/06/static-sidebar-and-tag-cloud/), which also includes a tag cloud (rendered by the [static_tag_cloud pugin](https://plugins.getnikola.com/v8/static_tag_cloud/)) into the sidebar.
 
 
 Example: Substitution chains
 ----------------------------
 
-Assume that in the above example, you want to use ``INSERT_TESTIMONIALS`` also in
-``menu.inc`` itself. Running the above example, this substitution will not be done,
-also if you extend the regular expression matching all HTML files to ``.*`` to
-match all files.
+Assume that in the above example, you want to use `INSERT_TESTIMONIALS` also in `menu.inc` itself. Running the above example, this substitution will not be done, also if you extend the regular expression matching all HTML files to `.*` to match all files.
 
-To apply substitutions to included files, you need to use substitution chains.
-Append the following to the configuration above::
+To apply substitutions to included files, you need to use substitution chains. Append the following to the configuration above:
 
     substitute_chains:
     - template: menu.inc
@@ -98,13 +79,13 @@ Append the following to the configuration above::
         'INSERT_TESTIMONIALS':
           file: testimonials.inc
 
-This will apply the substitution for ``INSERT_TESTIMONIALS`` also to ``menu.inc``.
+This will apply the substitution for `INSERT_TESTIMONIALS` also to `menu.inc`.
 
 
 Example: Creating index files
 -----------------------------
 
-Assume that you have folder structure::
+Assume that you have folder structure:
 
     input/
         index.html
@@ -113,12 +94,7 @@ Assume that you have folder structure::
             2017/
                 happynewyear-2017.jpeg
 
-You want to upload the output to a web server so it is available under
-``http://example.com``, but if someone accesses ``http://example.com/images/``
-or ``http://example.com/images/2017/``, you don't want the persons to see a
-file listing or some error page, but show them a nice message to check out
-the home page. You can use ``filetreesubs`` for this. Add the following
-to the configuration::
+You want to upload the output to a web server so it is available under `http://example.com`, but if someone accesses `http://example.com/images/` or `http://example.com/images/2017/`, you don't want the persons to see a file listing or some error page, but show them a nice message to check out the home page. You can use `filetreesubs` for this. Add the following to the configuration:
 
     create_index_filename: index.html
     create_index_content: |
@@ -134,21 +110,17 @@ to the configuration::
         </body>
       </html>
 
-Then in every folder not containing a file ``index.html``, a file
-``index.html`` will be created with the specified content.
+Then in every folder not containing a file `index.html`, a file `index.html` will be created with the specified content.
 
 
 Configuration file format
 -------------------------
 
-The configuration file is in `YAML format <https://en.wikipedia.org/wiki/YAML>`__.
-By default, the configuration is assumed to be in ``filetreesubs-config.yaml``
-in the current directory. If you want to specify a different configuration file
-name, you can simply specify it on the command line::
+The configuration file is in [YAML format](https://en.wikipedia.org/wiki/YAML). By default, the configuration is assumed to be in `filetreesubs-config.yaml` in the current directory. If you want to specify a different configuration file name, you can simply specify it on the command line:
 
     filetreesubs my-config-file.yaml
 
-The following commented YAML file shows all available options::
+The following commented YAML file shows all available options:
 
     # The source directory. Specify a path here.
     source: input

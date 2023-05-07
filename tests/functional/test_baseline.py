@@ -19,6 +19,8 @@ TEST_CASES = [
         "baseline-base-source",
         "baseline-base",
         0,
+        [],
+        [],
     ),
     (
         ["baseline-index.yaml"],
@@ -26,6 +28,26 @@ TEST_CASES = [
         "baseline-index-source",
         "baseline-index",
         0,
+        [],
+        [],
+    ),
+    (
+        ["baseline-full.yaml"],
+        "baseline-full.yaml",
+        "baseline-full-source",
+        "baseline-full",
+        0,
+        [
+            "sub",
+            "foo",
+            "foo/bar",
+            "foo/bar/baz",
+        ],
+        [
+            ("index.html", b"Foo"),
+            ("sub/index.html", b"Bar"),
+            ("foo/index.html", b"Some random file."),
+        ],
     ),
 ]
 
@@ -100,10 +122,18 @@ def change_cwd(directory):
 
 
 @pytest.mark.parametrize(
-    "arguments, config, source_directory, dest_directory, expected_rc", TEST_CASES
+    "arguments, config, source_directory, dest_directory, expected_rc, dirs_to_create, files_to_create",
+    TEST_CASES,
 )
 def test_baseline(
-    arguments, config, source_directory, dest_directory, expected_rc, tmp_path
+    arguments,
+    config,
+    source_directory,
+    dest_directory,
+    expected_rc,
+    dirs_to_create,
+    files_to_create,
+    tmp_path,
 ):
     tests_root = os.path.join("tests", "functional")
 
@@ -117,6 +147,13 @@ def test_baseline(
     for path, _, files in os.walk(tmp_path / source_directory):
         if ".keep" in files:
             os.unlink(os.path.join(path, ".keep"))
+
+    for directory in dirs_to_create:
+        (tmp_path / dest_directory / directory).mkdir(parents=True, exist_ok=True)
+
+    for file, content in files_to_create:
+        with (tmp_path / dest_directory / file).open("wb") as f:
+            f.write(content)
 
     # Re-build baseline
     with change_cwd(str(tmp_path)):

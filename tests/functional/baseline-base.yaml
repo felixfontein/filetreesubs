@@ -4,18 +4,6 @@
 
 source: baseline-base-source
 destination: baseline-base
-create_index_filename: index.html
-create_index_content: |
-  <!DOCTYPE html>
-  <html>
-    <head>
-      <title>Nothing.</title>
-      <meta name="robots" content="noindex">
-      <meta http-equiv="refresh" content="0; url=..">
-    </head>
-    <body>
-    </body>
-  </html>
 encoding: utf-8
 doit_config:
   dep_file: '.baseline-base.db'

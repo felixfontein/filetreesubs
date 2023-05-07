@@ -57,6 +57,7 @@ class FileTreeSubs:
     substitutes_filenames = {}
     substitutes_original_filenames = set()
     substitutes_content = {}
+    substitutes_content_config = {}
 
     def _do_copy(self, source, destination):
         """Copy file `source` to `destination`."""
@@ -108,6 +109,7 @@ class FileTreeSubs:
             raise RuntimeError(
                 f"Replacement value for key '{key}' must be a dict, but is of type {type(value)}!"
             )
+        self.substitutes_content_config[key] = value
         if "file" in value:
             value = value["file"]
             self.substitutes_original_filenames.add(value)
@@ -127,17 +129,29 @@ class FileTreeSubs:
         # pylint:disable=too-many-locals,too-many-branches,too-many-statements
         """Generate a list of doit tasks."""
         # First, set up substitution data
-        for _, subs in self.substitutes.items():
+        for pattern, subs in self.substitutes.items():
             for key, value in subs.items():
-                if key not in self.substitutes_content:
-                    self._process_replacement(key, value)
+                if key in self.substitutes_content_config:
+                    if self.substitutes_content_config[key] != value:
+                        raise RuntimeError(
+                            # pylint:disable-next=line-too-long
+                            f"Substitution for pattern '{pattern}': substitution '{key}' is already used somewhere else with a different meaning!"
+                        )
+                    continue
+                self._process_replacement(key, value)
         # Process substitution chains
         for chain in self.substitute_chains:
             file = chain["template"]
             substitutes = chain["substitutes"]
             files = []
             for key, key_file in substitutes.items():
-                assert key not in self.substitutes_content
+                if key in self.substitutes_content_config:
+                    if self.substitutes_content_config[key] != key_file:
+                        raise RuntimeError(
+                            # pylint:disable-next=line-too-long
+                            f"Substitution chain for '{file}': substitution '{key}' is already used somewhere else with a different meaning!"
+                        )
+                    continue
                 files.extend(self._process_replacement(key, key_file))
             filename = os.path.join(self.source, file)
             for key, value in self.substitutes_filenames.items():
@@ -259,7 +273,7 @@ class FileTreeSubs:
                 "actions": [(self._do_remove, (dst_file,))],
             }
         # Check which subdirectories are in destination which shouldn't be there
-        for directory in sorted(destdirs):
+        for directory in reversed(sorted(destdirs)):
             dst_file = os.path.join(self.destination, directory)
             yield {
                 "basename": "remove",

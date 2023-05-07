@@ -18,4 +18,4 @@ create_index_content: |
   </html>
 encoding: utf-8
 doit_config:
-  dep_file: '.baseline-base.db'
+  dep_file: '.baseline-index.db'

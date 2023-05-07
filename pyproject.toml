@@ -10,7 +10,7 @@ name = "filetreesubs"
 version = "1.2.0"
 description = "Synchronize a file tree with text file substitutions"
 license = "MIT"
-readme = "README.rst"
+readme = "README.md"
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Intended Audience :: Developers",
@@ -26,7 +26,7 @@ classifiers = [
 ]
 requires-python = ">=3.9"
 dependencies = [
-    "doit >= 0.28.0",
+    "doit >= 0.36.0",
     "PyYAML",
 ]
 
@@ -39,7 +39,7 @@ email = "felix@fontein.de"
 "Bug tracker" = "https://github.com/felixfontein/filetreesubs/issues"
 
 [project.scripts]
-antsibull-docs = "filetreesubs.__main__:main"
+filetreesubs = "filetreesubs.__main__:main"
 
 [project.optional-dependencies]
 codeqa = [
@@ -47,9 +47,17 @@ codeqa = [
     "pylint >= 2.17.4",
     "reuse",
 ]
+coverage = [
+    "coverage[toml]",
+]
 formatters = [
     "black",
     "isort",
+]
+test = [
+    "pytest",
+    "pytest-cov",
+    "pytest-error-for-skips",
 ]
 dev = [
     # Used by nox sessions

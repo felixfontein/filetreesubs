@@ -2,7 +2,7 @@
 # Copyright © 2014—2023 Felix Fontein.
 # SPDX-License-Identifier: MIT
 
-name: Python linting
+name: Python checks
 
 on:
   push:
@@ -26,6 +26,23 @@ jobs:
         uses: wntrblm/nox@2023.04.22
         with:
           python-versions: "3.11"
-      - name: Run linters.
+      - name: Run linters
         run: |
           nox -v -e lint
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out filetreesubs
+        uses: actions/checkout@v3
+      - name: Setup nox
+        uses: wntrblm/nox@2023.04.22
+        with:
+          python-versions: "3.9,3.10,3.11"
+      - name: Run tests
+        run: |
+          nox -v -e test
+      - name: Report coverage
+        run: |
+          nox -v -e coverage
+      - name: Upload coverage
+        uses: codecov/codecov-action@v3

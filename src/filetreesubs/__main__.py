@@ -39,25 +39,28 @@ import yaml
 import filetreesubs.subs
 
 
-class FileTreeSubsTaskLoader(doit.cmd_base.TaskLoader):
+class FileTreeSubsTaskLoader(doit.cmd_base.TaskLoader2):
     # pylint: disable=too-few-public-methods
     """Load tasks and doit config."""
 
     def __init__(self, file_tree_subs):
+        super().__init__()
         self.file_tree_subs = file_tree_subs
 
-    def load_tasks(self, cmd, opt_values, pos_args):  # pylint:disable=unused-argument
-        """
-        Load task.
-        """
+    def load_doit_config(self):
         doit_config = {
             "reporter": doit.reporter.ExecutedOnlyReporter,
             "outfile": sys.stderr,
-            "default_tasks": ["subs", "copy", "remove", "createindex"],
+            "default_tasks": ["subs", "copy", "remove", "create_index"],
         }
         doit_config.update(self.file_tree_subs.doit_config_update)
-        tasks = doit.loader.generate_tasks("main", self.file_tree_subs.get_tasks())
-        return tasks, doit_config
+        return doit_config
+
+    def load_tasks(self, cmd, pos_args):  # pylint:disable=unused-argument
+        """
+        Load task.
+        """
+        return doit.loader.generate_tasks("main", self.file_tree_subs.get_tasks())
 
 
 class FileTreeSubsDoitCmd(doit.doit_cmd.DoitMain):

@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out filetreesubs
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Setup nox
         uses: wntrblm/nox@2023.04.22
         with:
@@ -33,7 +33,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out filetreesubs
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Setup nox
         uses: wntrblm/nox@2023.04.22
         with:

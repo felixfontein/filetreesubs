@@ -25,7 +25,7 @@ jobs:
       - name: Setup nox
         uses: wntrblm/nox@2026.08.17
         with:
-          python-versions: "3.11"
+          python-versions: "3.14"
       - name: Run linters
         run: |
           nox -v -e lint
@@ -37,10 +37,27 @@ jobs:
       - name: Setup nox
         uses: wntrblm/nox@2026.08.17
         with:
-          python-versions: "3.9,3.10,3.11"
+          python-versions: "3.10,3.11,3.12,3.13,3.14,3.15"
       - name: Run tests
         run: |
-          nox -v -e test
+          nox -v -e test --pythons 3.10 3.11 3.12 3.13 3.14 3.15
+      - name: Report coverage
+        run: |
+          nox -v -e coverage
+      - name: Upload coverage
+        uses: codecov/codecov-action@v7
+  test-39:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out filetreesubs
+        uses: actions/checkout@v7
+      - name: Setup nox
+        uses: wntrblm/nox@2026.08.17
+        with:
+          python-versions: "3.9"
+      - name: Run tests
+        run: |
+          nox -v -e test --pythons 3.9
       - name: Report coverage
         run: |
           nox -v -e coverage

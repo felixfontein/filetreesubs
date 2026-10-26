@@ -23,7 +23,7 @@ jobs:
       - name: Check out filetreesubs
         uses: actions/checkout@v7
       - name: Setup nox
-        uses: wntrblm/nox@2026.08.17
+        uses: wntrblm/nox@2026.10.20
         with:
           python-versions: "3.14"
       - name: Run linters
@@ -35,7 +35,7 @@ jobs:
       - name: Check out filetreesubs
         uses: actions/checkout@v7
       - name: Setup nox
-        uses: wntrblm/nox@2026.08.17
+        uses: wntrblm/nox@2026.10.20
         with:
           python-versions: "3.10,3.11,3.12,3.13,3.14,3.15"
       - name: Run tests
@@ -52,7 +52,7 @@ jobs:
       - name: Check out filetreesubs
         uses: actions/checkout@v7
       - name: Setup nox
-        uses: wntrblm/nox@2026.08.17
+        uses: wntrblm/nox@2026.10.20
         with:
           python-versions: "3.9"
       - name: Run tests
